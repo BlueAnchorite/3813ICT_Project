@@ -1,3 +1,10 @@
 <p>
   login works!
 </p>
+
+<form (submit)="loginUser($event)">
+  <input [(ngModel)]="username" type="email" placeholder="Username" id="username" name="username">
+  <input [(ngModel)]="password" type="password" placeholder="password" id="password" name="password">
+  <div ng-if="errorMessage">{{ errorMessage }}</div>
+  <button type="submit">Submit</button>
+</form>

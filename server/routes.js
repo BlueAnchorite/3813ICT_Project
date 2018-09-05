@@ -175,25 +175,23 @@ module.exports = function(app, path){
     app.put('/api/users/:id', function (req, res) {
         let id = req.params.id;
         let s = users.find(x => x.id == id);
-        
+        let updateIndex = users.findIndex(x => x.id == id);
         s.username = req.body.username;
         s.password = req.body.password;
         s.role = req.body.role;
-
+        users[updateIndex] = s;
+        saveUsers();
         res.send(s);
-
     });
     
     app.put('/api/groups/:id', function (req, res) {
         let id = req.params.id;
-        let s = users.find(x => x.id == id);
-        
-        s.username = req.body.username;
-        s.password = req.body.password;
-        s.role = req.body.role;
-
+        let s = groups.find(x => x.id == id);
+        let updateIndex = groups.findIndex(x => x.id == id);
+        s.group_name = req.body.group_name;
+        groups[updateIndex] = s;
+        saveGroups();
         res.send(s);
-
     });
     
     app.put('/api/groups/:group_id/channels/:channel_id', function (req, res) {
@@ -202,11 +200,20 @@ module.exports = function(app, path){
         let s = channels.find(function(element) {
             return element == group_id && element == channel_id;
         });
-        
+        let updateIndex = channels.findIndex(function(element) {
+            return element == group_id && element == channel_id;
+        });
         s.channel_name = req.body.channel_name;
+        channels[updateIndex] = s;
+        saveChannels();
         res.send(s);
-
     });
+    
     //need 3 DELETE paths
+    app.delete('/api/users/:id', function (req, res) {
+        let id = req.params.group_id;
+        users = users.filter(x => x.id != id);
+        res.send(users);
+    });
 };
 

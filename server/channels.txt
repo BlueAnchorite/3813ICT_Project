@@ -1,0 +1,1 @@
+[{"id":1,"channel_name":"Test Channel","channel_id":1,"parent_group":1},{"id":2,"group_name":"Second Test Channel","channel_id":2,"parent_group":1}]
